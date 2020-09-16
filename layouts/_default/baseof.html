@@ -5,6 +5,7 @@
 <!-- 对于变量，先定义后使用 -->
 
 {{ $lang := $.Site.LanguageCode | default "en" }}
+
 {{ $title := $.Site.Title }}
 {{ if .Params.Title }}
     {{ $title = delimit (slice $title .Params.Title) " | " }}
@@ -35,7 +36,16 @@
 
 <body>
     <div id="body-root">
-        {{ block "main" . }}{{ end }}
+        <div id="body-header">
+            {{ partial "body-header.html" . }}
+        </div>
+        <div id="body-main">
+            {{ block "main" . }}{{ end }}
+        </div>
+        <div id="body-footer">
+            {{ partial "body-footer.html" . }}
+        </div>
+        {{ partial "body-scripts.html" . }}
     </div>
 </body>
 

@@ -1,3 +1,11 @@
+<!-- Customized Bootstrap 4.5.2 -->
 {{ $scss := resources.Get "scss/vendor.scss" | resources.ToCSS | minify }}
 {{ $scss = $scss.RelPermalink }}
 <link rel="stylesheet" href="{{ $scss }}">
+
+<!-- Import Javascript Libraries from static folder -->
+{{ range ( slice "jquery-3.5.1.slim.min.js" "bootstrap.bundle.min.js" ) }}
+    {{ $path := "/js/" | relURL }}
+    {{ $path = delimit ( slice $path . )  "" }}
+    <script src="{{ $path }}"></script>
+{{ end }}
